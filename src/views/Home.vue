@@ -12,3 +12,10 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.home{
+	height: 500px;
+	width: 500px;
+	background: red;
+}
+</style>
