@@ -3,7 +3,7 @@
 		<el-menu
 			router
       default-active="2">
-      <el-menu-item index="/">
+      <el-menu-item index="/home">
           <i class="el-icon-location"></i>
           <span>导航一</span>
       </el-menu-item>
@@ -16,6 +16,8 @@
 </template>
 <script>
 export default {
-	
+	mounted(){
+		this.$router.push('/home')
+	}
 }
 </script>

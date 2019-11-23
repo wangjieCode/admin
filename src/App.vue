@@ -1,14 +1,12 @@
 <template>
   <div id="app">
-    <layout />
+    <transition name="el-fade-in" mode="out-in">
+      <router-view style="height: 100vh" />
+    </transition>
   </div>
 </template>
 <script>
-import layout from "./layout/layout"
 export default {
-  components: {
-    layout
-  }
 }
 </script>
 <style lang="scss">
@@ -16,5 +14,4 @@ export default {
 	padding: 0px;
 	margin: 0px;
 }
-
 </style>

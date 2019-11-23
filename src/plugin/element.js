@@ -5,7 +5,11 @@ import {
 	Header,
 	Aside,
 	Main,
-	MenuItem
+	MenuItem,
+	Form,
+	FormItem,
+	Input,
+	Button
 } from 'element-ui';
 
 Vue.use(Menu)
@@ -14,7 +18,10 @@ Vue.use(Header)
 Vue.use(Aside)
 Vue.use(Main)
 Vue.use(MenuItem)
-
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Input)
+Vue.use(Button)
 export default Vue;
 // Vue.use(Loading.directive);
 

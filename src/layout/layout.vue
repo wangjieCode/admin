@@ -5,9 +5,9 @@
       <el-aside width="200px">
         <j-nav />
       </el-aside>
-      <el-main>
-        <transition name="el-fade-in-linear">
-          <router-view />
+      <el-main class="main-init">
+        <transition name="el-fade-in" mode="out-in">
+          <router-view class="routerView" />
         </transition>
       </el-main>
     </el-container>
@@ -21,7 +21,9 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+
+<style lang="scss" scoped>
+
 .el-header,
 .el-footer {
   background-color: #b3c0d1;
@@ -36,9 +38,13 @@ export default {
 }
 
 .el-main {
-  background-color: #e9eef3;
   color: #333;
   text-align: center;
-  overflow: scroll;
+	padding: 0px;
+	overflow: hidden;
+}
+.routerView {
+  width: 100%;
+  height: 100%;
 }
 </style>

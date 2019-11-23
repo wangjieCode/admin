@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-		<h1>首页</h1>
+		<h1>??</h1>
   </div>
 </template>
 
@@ -13,9 +13,5 @@ export default {
 }
 </script>
 <style lang="scss">
-.home{
-	height: 500px;
-	width: 500px;
-	background: red;
-}
+
 </style>
