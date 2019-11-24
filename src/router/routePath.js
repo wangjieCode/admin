@@ -1,7 +1,7 @@
 export const routes = [
 	{
 		path: '/',
-		name: 'home',
+		name: 'index',
 		component: () => import('../layout/layout.vue'),
 		children: [
 			{
@@ -11,7 +11,7 @@ export const routes = [
 			},
 			{
 				path: '/about',
-				name: 'home',
+				name: 'about',
 				component: () => import('../views/About.vue'),
 			}
 		]
