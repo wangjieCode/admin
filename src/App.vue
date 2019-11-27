@@ -7,15 +7,15 @@
   </div>
 </template>
 <script>
-import mm from './server/user'
+// import mm from './server/user'
 export default {
-  async mounted () {
-    try {
-      await mm()
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // async mounted () {
+  //   try {
+  //     await mm()
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 }
 </script>
 <style lang="scss">
