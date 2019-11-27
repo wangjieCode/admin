@@ -1,94 +1,88 @@
 <template>
-  <el-form  ref="from" class="drawer">
-    <template  v-for="(item, index) in sResult">
-      <el-form-item :model="sResult" :key="index" :label="item.title">
-        <el-switch v-if="flagBoo(item.type)" v-model="item.value"></el-switch>
-        <el-input-number
-          v-else-if="flagNumber(item.type)"
-          v-model="item.value"
-          :min="1"
-          :max="50"
-          label="描述文字"
-        ></el-input-number>
-        <template v-else-if="flagbox(item.type)">
-          <el-checkbox
-            border
-            v-model="item.value"
-            v-for="(item,index) in item.value"
-            :label="item.falg"
-            :key="index"
-          >{{item.title}}</el-checkbox>
-        </template>
-        <span v-else>{{item.value}}</span>
-      </el-form-item>
-    </template>
-    <el-form-item>
-      <el-button type="primary" @click="onSubmit">立即创建</el-button>
-      <el-button @click="resetForm('from')">取消修改</el-button>
-    </el-form-item>
-  </el-form>
+  <div class="home">
+    <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">点我编辑</el-button>
+    <el-drawer class="drawer" title="7s检查" :visible.sync="drawer" direction="rtl" size="30%">
+      <j-seven
+        ref="index"
+        @reset="reset(index, arguments)"
+        v-for="(item, index) in sResult"
+        :key="index"
+        :sResult="item"
+      />
+      <el-button :disabled="disabled" type="primary" @click="submit">保存修改</el-button>
+    </el-drawer>
+  </div>
 </template>
+
 <script>
+const newResult = [];
+import jSeven from "@/components/edit";
 export default {
-  props: {
-    sResult: Array
+  name: "home",
+  methods: {
+    reset() {
+      this.disabled = false;
+      const index = arguments[0];
+      const value = arguments[1][0];
+      newResult.push({ index, value });
+    },
+    submit() {
+      if (newResult[0] == undefined) return;
+      newResult.forEach((ele, target) => {
+        this.sResult[target.index] = target.value;
+      });
+      console.log(this.sResult);
+    }
   },
   data() {
     return {
-      temp: null
+      disabled: true,
+      drawer: true,
+      sResult: [
+        {
+          type: "text",
+          title: "备注",
+          value: "测试结果"
+        },
+        {
+          type: "boolean",
+          title: "被子是否叠放整齐",
+          value: false
+        },
+        {
+          type: "boolean",
+          title: "1.有用无用未区分，需要整理",
+          value: true
+        },
+        {
+          type: "number",
+          title: "迟到人数",
+          value: 10
+        },
+        {
+          type: "checkout",
+          title: "学生上课状态",
+          value: [
+            {
+              title: "老师坐的上课",
+              flag: true
+            },
+            {
+              title: "老师坐的上课",
+              flag: true
+            },
+            { title: "老师坐的上课", flag: true },
+            { title: "老师坐的上课", flag: true },
+            { title: "老师坐的上课", flag: true }
+          ]
+        }
+      ]
     };
   },
-  mounted() {
-    this.temp = this.sResult;
-  },
-  methods: {
-    onSubmit() {
-      console.log(this.sResult);
-    },
-    resetForm(formName) {
-      console.log(formName,this.$refs[formName])
-      this.$refs[formName].resetFields();
-    }
-  },
-  computed: {
-    flagBoo() {
-      return function(flag) {
-        if (flag == "boolean") {
-          return true;
-        }
-        return false;
-      };
-    },
-    flagNumber() {
-      return function(flag) {
-        if (flag == "number") {
-          return true;
-        }
-        return false;
-      };
-    },
-    flagbox() {
-      return function(flag) {
-        if (flag == "checkout") {
-          return true;
-        }
-        return false;
-      };
-    }
+  components: {
+    jSeven
   }
 };
 </script>
-<style lang="scss" scoped>
-.drawer {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: space-around;
-  border: 1px solid;
-  .el-form-item {
-    display: flex;
-    justify-content: center;
-    font-size: 25px !important;
-  }
-}
+<style lang="scss">
 </style>
