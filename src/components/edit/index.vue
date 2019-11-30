@@ -1,88 +1,96 @@
 <template>
-  <div class="home">
-    <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">点我编辑</el-button>
-    <el-drawer class="drawer" title="7s检查" :visible.sync="drawer" direction="rtl" size="30%">
-      <j-seven
-        ref="index"
-        @reset="reset(index, arguments)"
-        v-for="(item, index) in sResult"
-        :key="index"
-        :sResult="item"
-      />
-      <el-button :disabled="disabled" type="primary" @click="submit">保存修改</el-button>
-    </el-drawer>
-  </div>
+  <el-form ref="from" :model="sResult" class="drawer" :class="{'from-active':active}">
+    <el-form-item prop="value" :label="sResult.title">
+      <el-switch v-if="flagBoo(sResult.type)" v-model="sResult.value"></el-switch>
+      <el-input-number
+        v-else-if="flagNumber(sResult.type)"
+        v-model="sResult.value"
+        :min="1"
+        :max="50"
+        label="描述文字"
+      ></el-input-number>
+      <template v-else-if="flagbox(sResult.type)">
+        <el-checkbox
+          border
+          v-model="item.value"
+          v-for="(item,index) in sResult.value"
+          :label="item.type"
+          :key="index"
+        >{{item.title}}</el-checkbox>
+      </template>
+      <span v-else>{{sResult.value}}</span>
+    </el-form-item>
+  </el-form>
 </template>
-
 <script>
-const newResult = [];
-import jSeven from "@/components/edit";
 export default {
-  name: "home",
-  methods: {
-    reset() {
-      this.disabled = false;
-      const index = arguments[0];
-      const value = arguments[1][0];
-      newResult.push({ index, value });
-    },
-    submit() {
-      if (newResult[0] == undefined) return;
-      newResult.forEach((ele, target) => {
-        this.sResult[target.index] = target.value;
-      });
-      console.log(this.sResult);
+  props: {
+    sResult: Object
+  },
+  watch:{
+    sResult:{
+      handler(newVlaue){
+        this.$emit('reset',newVlaue);
+        let { value } = this.temp;
+        if(value != newVlaue.value){
+          this.active = true
+        }else{
+          this.active = false
+        }
+      },
+      deep: true 
     }
   },
   data() {
     return {
-      disabled: true,
-      drawer: true,
-      sResult: [
-        {
-          type: "text",
-          title: "备注",
-          value: "测试结果"
-        },
-        {
-          type: "boolean",
-          title: "被子是否叠放整齐",
-          value: false
-        },
-        {
-          type: "boolean",
-          title: "1.有用无用未区分，需要整理",
-          value: true
-        },
-        {
-          type: "number",
-          title: "迟到人数",
-          value: 10
-        },
-        {
-          type: "checkout",
-          title: "学生上课状态",
-          value: [
-            {
-              title: "老师坐的上课",
-              flag: true
-            },
-            {
-              title: "老师坐的上课",
-              flag: true
-            },
-            { title: "老师坐的上课", flag: true },
-            { title: "老师坐的上课", flag: true },
-            { title: "老师坐的上课", flag: true }
-          ]
-        }
-      ]
+      active: false,
+      temp:null
     };
   },
-  components: {
-    jSeven
+  mounted() {
+    this.temp = JSON.parse(JSON.stringify(this.sResult))
+  },
+  methods: {},
+  computed: {
+    flagBoo() {
+      return function(flag) {
+        if (flag == "boolean") {
+          return true;
+        }
+        return false;
+      };
+    },
+    flagNumber() {
+      return function(flag) {
+        if (flag == "number") {
+          return true;
+        }
+        return false;
+      };
+    },
+    flagbox() {
+      return function(flag) {
+        if (flag == "checkout") {
+          return true;
+        }
+        return false;
+      };
+    }
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
+.drawer {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-around;
+  .el-form-item {
+    display: flex;
+    justify-content: center;
+  }
+}
+.from-active {
+  background-color: greenyellow;
+}
 </style>

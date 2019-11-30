@@ -1,26 +1,20 @@
 <template>
-  <el-container style="height: 100vh">
-    <el-container>
-      <el-aside width="200px">
-        <j-nav />
-      </el-aside>
-      <el-main class="main-init">
-        <el-header>
-          <j-header />
-          <el-breadcrumb separator="/">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>
-              <a href="/">活动管理</a>
-            </el-breadcrumb-item>
-            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-          </el-breadcrumb>
-        </el-header>
+  <el-container>
+    <el-aside width="200px">
+      <j-nav />
+    </el-aside>
+    <el-main style="margin-left: 200px">
+      <el-container style="transfrom: translateX(200px)">
+      <el-header>
+        <j-header />
+      </el-header>
+      <el-main>
         <transition name="el-fade-in" mode="out-in">
           <router-view class="routerView" />
         </transition>
       </el-main>
     </el-container>
+    </el-main>
   </el-container>
 </template>
 <script>
@@ -47,17 +41,23 @@ export default {
   background-color: rgb(48, 65, 86);
   color: #333;
   text-align: center;
+  height: 100vh;
+  position: fixed;
 }
 
 .el-main {
   color: #333;
   text-align: center;
   padding: 0px;
-  overflow: hidden;
   background-color: #f0f2f5;
 }
 .routerView {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // overflow-x: hidden;
+  box-sizing: border-box;
 }
 </style>
