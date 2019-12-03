@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <transition name="el-fade-in" mode="out-in">
-      <router-view />
+      <router-view style="height: 100vh" />
     </transition>
   </div>
 </template>

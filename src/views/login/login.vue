@@ -1,49 +1,60 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm"
-             class="login-form"
-             auto-complete="on"
-             label-position="left">
-
+    <el-form ref="loginForm" v-model="loginForm" class="login-form" auto-complete="on" label-position="left">
       <div class="title-container">
         <h3 class="title">值班管理系统</h3>
       </div>
 
       <el-form-item prop="username">
-        <el-input ref="username"
-                  placeholder="用户名"
-                  name="username"
-                  type="text"
-                  tabindex="1"
-                  auto-complete="on"
-                  maxlength="20" />
+        <el-input
+        v-model="loginForm.username"
+          ref="username"
+          placeholder="用户名"
+          name="username"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+          maxlength="20"
+        />
       </el-form-item>
 
       <el-form-item prop="password">
-        <el-input ref="password"
-                  placeholder="密码"
-                  name="password"
-                  tabindex="2"
-                  auto-complete="on"
-                  maxlength="16" />
+        <el-input
+          v-model="loginForm.password"
+          ref="password"
+          placeholder="密码"
+          name="password"
+          tabindex="2"
+          auto-complete="on"
+          maxlength="16"
+        />
       </el-form-item>
 
-      <el-button type="primary"
-                 @click="submit"
-                 style="width:100%;margin-bottom:30px;">登陆</el-button>
-
+      <el-button type="primary" @click="submit" style="width:100%;margin-bottom:30px;">登陆</el-button>
     </el-form>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
-	methods:{
-		submit(){
-			this.$router.push('/')
-		}
-	}
-}
+  data() {
+    return {
+      loginForm: {
+        username: "",
+        password: ""
+      }
+    };
+  },
+  methods: {
+    ...mapActions['toLogin'],
+    submit() {
+      console.log(this.loginForm)
+      const {username,password } = this.loginForm
+      this.$store.dispatch('toLogin',{username,password})
+    }
+  }
+};
 </script>
 
 <style lang="scss">

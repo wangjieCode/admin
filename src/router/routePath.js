@@ -34,6 +34,6 @@ export const routes = [
 	},
 	{
 		path: '*',
-		redirect: '/index'
+		redirect: '/login'
 	},
 ]

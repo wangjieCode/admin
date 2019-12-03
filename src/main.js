@@ -8,7 +8,8 @@ import router from './router'
 import store from './store'
 // element-UI的全部样式文件 可更改主题颜色等
 import './styles.scss'
-
+import cookie from 'js-cookie';
+Vue.prototype.$cookie = cookie; 
 // 模拟数据入口文件
 import './mock/index'
 import NProgress from 'nprogress' // 进度条
