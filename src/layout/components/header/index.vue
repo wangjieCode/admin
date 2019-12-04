@@ -1,20 +1,22 @@
 <template>
     <div class="header">
+        <j-history/>
     </div>
 </template>
 <script>
-// import jPersonal from '@/components/personal'
+import jHistory from '../history'
 export default {
     components:{
-        // jPersonal
+        jHistory
     }
 }
 </script>
 <style lang="scss" scoped>
 .header{
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    height: 40px;
+    height: 100px;
 }
 </style>

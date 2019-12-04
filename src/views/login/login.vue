@@ -3,6 +3,7 @@
     <el-form ref="loginForm" v-model="loginForm" class="login-form" auto-complete="on" label-position="left">
       <div class="title-container">
         <h3 class="title">值班管理系统</h3>
+        {{ $store.state.token }}
       </div>
 
       <el-form-item prop="username">
@@ -41,17 +42,24 @@ export default {
   data() {
     return {
       loginForm: {
-        username: "",
-        password: ""
-      }
+        username: "admin",
+        password: "123456"
+      },
+      loaging: true
     };
   },
   methods: {
-    ...mapActions['toLogin'],
+    ...mapActions['login'],
     submit() {
-      console.log(this.loginForm)
       const {username,password } = this.loginForm
-      this.$store.dispatch('toLogin',{username,password})
+      this.$store.dispatch('login',{username,password}).then( () => {
+        this.$router.push('/index')
+      }).catch( () => {
+        this.$message({
+          message: '账号或密码错误，请重试',
+          type: 'success'
+        });
+      })
     }
   }
 };

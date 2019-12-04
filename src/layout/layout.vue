@@ -5,7 +5,7 @@
     </el-aside>
     <el-main style="margin-left: 200px">
       <el-container style="transfrom: translateX(200px)">
-      <el-header>
+      <el-header style="height: 100px">
         <j-header />
       </el-header>
       <el-main>

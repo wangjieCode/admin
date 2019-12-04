@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import checkData from './checkData'
 import user from './user'
+import router from './router'
 
 Vue.use(Vuex)
 
@@ -11,5 +12,6 @@ export default new Vuex.Store({
   modules: {
     user,
     checkData, // 信息收集模块(各种检查增删改查)
+    router,
   }
 })

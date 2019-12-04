@@ -1,34 +1,15 @@
-import axios from './index';
-export default function test() {
-	return  axios.post("/test", {
-		data:{
-			page: 1,
-			connt: 10
-		}
-	})
+import {test} from "./index";
+
+export async function login(userName,password) {
+    const {data} =  await test.post('/teacher/login',{
+        number:userName,
+        password
+    })
+    return data
 }
-/**
- * 获取当前用户当前所有检查
- */
-export function getCheck() {
-	return axios.post('/test')
+export function logout() {
+	
 }
-/**
- * 获取当前用户当前已经检查
- */
-export function getCheckOut() {
-	return axios.get('/getCheckOut')
-}
-/**
- * 获取当前用户检查历史记录
- */
-export function getCheckOutHistory() {
-	return axios.get('/getCheckOutHistory')
-}
-/**
- * 7s检查信息
- */
-export async function s() {
-	const  {data} = await axios.get('/7s1')
-	return data;
+export function getInfo() {
+	
 }

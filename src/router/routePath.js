@@ -18,6 +18,9 @@ export const routes = [
 			{
 				path: 'check',
 				name: 'check',
+				meta:{
+					title: '检查信息'
+				},
 				component: () => import('../views/check.vue'),
 			}
 		]

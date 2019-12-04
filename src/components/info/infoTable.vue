@@ -1,16 +1,10 @@
 <template>
   <div class="box-card">
     <el-row style="background-color: #fff" type="flex" justify="start">
-      <el-col :span="19">
-        <el-dropdown trigger="click" @command="checkoutClick">
-          <el-button type="primary">
-            {{ dropdown }}
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item :command="index" v-for="(item,index) in type" :key="index">{{item}}</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+      <el-col style="display: flex;
+    align-items: center;" :span="19">
+        <span style="padding:0 30px;font-weight: bold">选择检查类型</span>
+        <el-button @click="checkoutClick(index)" v-for="(item,index) in type" :key="index">{{item}}</el-button>
       </el-col>
       <el-col :span="5">
         <j-screen />
@@ -36,11 +30,11 @@
           label="检查结果"
         >
           <div slot-scope="scope">
-
-            <el-button :type="scope.row.state ? 'success' : 'danger'"
-              disable-transitions @click="drawer = true" > 
-              {{scope.row.state ? '检查结果': '填写检查'}}
-            </el-button>
+            <el-button
+              :type="scope.row.state ? 'success' : 'danger'"
+              disable-transitions
+              @click="drawer = true"
+            >{{scope.row.state ? '检查结果': '填写检查'}}</el-button>
 
             <el-drawer
               custom-class="drawer"
@@ -62,7 +56,7 @@
         </el-table-column>
       </el-table>
     </el-row>
-    <el-row type="flex" justify="end">
+    <el-row style="background-color: #fff" type="flex" justify="end">
       <el-pagination @next-click="next" background layout="prev, pager, next" :total="100"></el-pagination>
     </el-row>
   </div>
@@ -71,21 +65,13 @@
 let newResult = [];
 import jScreen from "./screen";
 import jSeven from "@/components/edit";
-import { s } from "@/server/user";
 export default {
   props: {
     tableData: Array
   },
-  mounted() {
-    s().then(data => {
-      console.log(data);
-      this.test = data.data;
-    });
-    console.log(this.test);
-  },
+  mounted() {},
   methods: {
     filterTag(value, row) {
-      console.log("value",value,row)
       return row.state === value;
     },
     next() {
@@ -111,15 +97,15 @@ export default {
       const temp = [];
       temp.push({ index, value });
       this.$nextTick(() => {
-        newResult = temp
-      })
+        newResult = temp;
+      });
     },
     submit() {
       newResult.forEach((ele, target) => {
         if (newResult[target] == undefined) return;
         this.test[target] = ele.value;
       });
-      this.$emit('submit', this.test)
+      this.$emit("submit", this.test);
     }
   },
   data() {
@@ -129,7 +115,99 @@ export default {
       dropdown: "7s检查",
       type: ["7s检查", "自习检查", "寝室检查", "教学检查"],
       disabled: true,
-      test: {}
+      test: [
+        {
+          type: "number",
+          value: 10,
+          title: "学生迟到人数"
+        },
+        {
+          type: "number",
+          value: 10,
+          title: "学生旷课人数"
+        },
+        {
+          type: "number",
+          value: 10,
+          title: "学生请假人数"
+        },
+        {
+          type: "checkout",
+          value: [
+            {
+              title: "睡觉",
+              type: false
+            },
+            {
+              title: "游戏",
+              type: false
+            },
+            {
+              title: "不带课本",
+              type: false
+            },
+            {
+              title: "睡觉",
+              type: false
+            },
+            {
+              title: "玩手机",
+              type: false
+            },
+            {
+              title: "不穿工作服",
+              type: false
+            },
+            {
+              title: "吃零食",
+              type: false
+            },
+            {
+              title: "交头结耳",
+              type: false
+            }
+          ],
+          title: "老师上课状态"
+        },
+        {
+          type: "checkout",
+          value: [
+            {
+              title: "睡觉",
+              type: false
+            },
+            {
+              title: "游戏",
+              type: false
+            },
+            {
+              title: "不带课本",
+              type: false
+            },
+            {
+              title: "睡觉",
+              type: false
+            },
+            {
+              title: "玩手机",
+              type: false
+            },
+            {
+              title: "不穿工作服",
+              type: false
+            },
+            {
+              title: "吃零食",
+              type: false
+            },
+            {
+              title: "交头结耳",
+              type: false
+            }
+          ],
+          title: "学生上课状态"
+        }
+      ]
     };
   },
   components: {
@@ -144,6 +222,8 @@ $header: 150 * 3 /10 + "px";
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 30px;
+  background-color: #fff;
 }
 .el-table .success-row {
   background: #f0f9eb !important;
@@ -151,8 +231,10 @@ $header: 150 * 3 /10 + "px";
 .el-table .warning-row {
   background: oldlace;
 }
-.drawer .el-drawer__body{
+.drawer .el-drawer__body {
   display: flex;
   flex-direction: column;
+}
+.el-pagination {
 }
 </style>

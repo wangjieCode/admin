@@ -1,10 +1,15 @@
 <template>
-  <div class="home">首页</div>
+  <div class="home">
+    <edit />
+  </div>
 </template>
 
 <script>
+import edit from '@/components/edit/from@'
 export default {
-
+  components:{
+    edit
+  }
 }
 </script>
 

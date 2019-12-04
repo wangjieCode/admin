@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    {{ checkType }}
     <j-info-Table @choice="choice"  @submit="submit" :tableData="tableData" @next="next" />
   </div>
 </template>
@@ -24,10 +23,15 @@ export default {
       this.$store.dispatch("getTableData", { checkType,count, pageNow });
     },
     choice(e){
-      this.checkType = e
+      this.checkType = e;
+      this.getData()
     },
     submit(newResult){
       this.$store.dispatch("submitData", { newResult });
+    },
+    getData(){
+      let { checkType,count, pageNow } = this
+      this.$store.dispatch("getTableData", { checkType,count, pageNow });
     }
   },
   data() {

@@ -11,7 +11,7 @@ import './styles.scss'
 import cookie from 'js-cookie';
 Vue.prototype.$cookie = cookie; 
 // 模拟数据入口文件
-import './mock/index'
+// import './mock/index'
 import NProgress from 'nprogress' // 进度条
 import 'nprogress/nprogress.css' //这个样式必须引入
 NProgress.inc(0.4)

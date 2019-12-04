@@ -1,6 +1,6 @@
 <template>
   <el-form ref="from" :model="sResult" class="drawer" :class="{'from-active':active}">
-    <el-form-item prop="value" :label="sResult.title">
+    <el-form-item :class="{'checkbox':flagbox(sResult.type)}" prop="value" :label="sResult.title">
       <el-switch v-if="flagBoo(sResult.type)" v-model="sResult.value"></el-switch>
       <el-input-number
         v-else-if="flagNumber(sResult.type)"
@@ -10,13 +10,13 @@
         label="描述文字"
       ></el-input-number>
       <template v-else-if="flagbox(sResult.type)">
-        <el-checkbox
+        <el-checkbox-button
           border
           v-model="item.value"
           v-for="(item,index) in sResult.value"
           :label="item.type"
           :key="index"
-        >{{item.title}}</el-checkbox>
+        >{{item.title}}</el-checkbox-button>
       </template>
       <span v-else>{{sResult.value}}</span>
     </el-form-item>
@@ -27,28 +27,28 @@ export default {
   props: {
     sResult: Object
   },
-  watch:{
-    sResult:{
-      handler(newVlaue){
-        this.$emit('reset',newVlaue);
+  watch: {
+    sResult: {
+      handler(newVlaue) {
+        this.$emit("reset", newVlaue);
         let { value } = this.temp;
-        if(value != newVlaue.value){
-          this.active = true
-        }else{
-          this.active = false
+        if (value != newVlaue.value) {
+          this.active = true;
+        } else {
+          this.active = false;
         }
       },
-      deep: true 
+      deep: true
     }
   },
   data() {
     return {
       active: false,
-      temp:null
+      temp: null
     };
   },
   mounted() {
-    this.temp = JSON.parse(JSON.stringify(this.sResult))
+    this.temp = JSON.parse(JSON.stringify(this.sResult));
   },
   methods: {},
   computed: {
@@ -79,18 +79,40 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .drawer {
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: space-around;
+  // padding: 30px;
   .el-form-item {
     display: flex;
-    justify-content: center;
+    // justify-content: center;
   }
 }
 .from-active {
-  background-color: greenyellow;
+  font-weight: bold;
+}
+.el-form-item__label {
+  font-size: 16px;
+  padding-left: 30px;
+}
+.el-form-item{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.checkbox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .el-form-item__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+  }
 }
 </style>

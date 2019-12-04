@@ -1,5 +1,5 @@
-import mm from "@/server/user";
-import { getCheck } from "../server/user";
+import mm from "@/server/test";
+import { getCheckTeachInspect, getCheckdormInspect } from "../server/check";
 /**
  * 检查类型 0 ==> 7s 1 ==> "自习检查", 2 ==> "寝室检查", 3 ==> "教学检查"
  */
@@ -13,7 +13,8 @@ export default {
 			"address": "xxxx",
 		}],
 		loading: true,
-		test: 1000
+		test: 1000,
+		Total: 0,
 	},
 	getters: {
 		tableData(state) {
@@ -50,8 +51,39 @@ export default {
 		 */
 		getTableData(context, { checkType, count, pageNow }) {
 			console.log(checkType, count, pageNow)
-			getCheck().then(({ data }) => {
-				context.commit('changeTableData', data)
+			getCheckdormInspect().then(res => {
+				console.log(res)
+			}).catch( rej => {
+				console.log(rej)
+			})
+			switch (checkType) {
+				case 0:
+					getCheckdormInspect().then(res => {
+						console.log(res)
+					}).catch( rej => {
+						console.log(rej)
+					})
+					return;
+				case 1:
+					getCheckdormInspect().then(res => {
+						console.log(res)
+					})
+					return;
+				case 2:
+					getCheckdormInspect().then(res => {
+						console.log(res)
+					})
+					return
+				case 3:
+					getCheckTeachInspect().then(res => {
+						console.log(res)
+					})
+					return
+			}
+			getCheckTeachInspect().then(() => {
+				// const {pages,size,records} = data.data;
+				// console.log(data, size*(pages-1)+records.length)
+				// context.commit('changeTableData', data)
 			})
 		},
 		/**
