@@ -5,13 +5,12 @@
     </el-aside>
     <el-main style="margin-left: 200px">
       <el-container style="transfrom: translateX(200px)">
-      <el-header style="height: 100px">
-        <j-header />
+      <el-header style="height: 93px">
+        <j-header/>
+        <tags-view />
       </el-header>
       <el-main>
-        <transition name="el-fade-in" mode="out-in">
-          <router-view class="routerView" />
-        </transition>
+        <j-main />
       </el-main>
     </el-container>
     </el-main>
@@ -19,10 +18,14 @@
 </template>
 <script>
 import jNav from "./components/nav";
-import jHeader from "./components/header";
+import jHeader from './components/header/Navbar'
+import jMain from "./components/AppMain";
+import TagsView from './components/TagsView'
 export default {
   components: {
     jNav,
+    jMain,
+    TagsView,
     jHeader
   }
 };

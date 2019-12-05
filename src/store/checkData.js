@@ -1,5 +1,5 @@
 import mm from "@/server/test";
-import { getCheckTeachInspect, getCheckdormInspect } from "../server/check";
+import { getCheckTeachInspect, getCheckdormInspect,getCheckise7sInspect } from "../server/check";
 /**
  * 检查类型 0 ==> 7s 1 ==> "自习检查", 2 ==> "寝室检查", 3 ==> "教学检查"
  */
@@ -40,7 +40,7 @@ export default {
 	},
 	mutations: {
 		changeTableData(state, obj) {
-			state.tableData = obj.data
+			state.table = obj
 		}
 	},
 	actions: {
@@ -49,42 +49,32 @@ export default {
 		 * @param {vuex模块上下文} context 
 		 * @param {tabledata初始化参数} param1 
 		 */
-		getTableData(context, { checkType, count, pageNow }) {
-			console.log(checkType, count, pageNow)
-			getCheckdormInspect().then(res => {
-				console.log(res)
-			}).catch( rej => {
-				console.log(rej)
-			})
+		async getTableData(context, { checkType}) {
+			let result;
 			switch (checkType) {
 				case 0:
-					getCheckdormInspect().then(res => {
-						console.log(res)
-					}).catch( rej => {
-						console.log(rej)
-					})
-					return;
+					result = await getCheckise7sInspect()
+					break;
 				case 1:
 					getCheckdormInspect().then(res => {
 						console.log(res)
 					})
-					return;
+					break;
 				case 2:
 					getCheckdormInspect().then(res => {
 						console.log(res)
 					})
-					return
+					break;
 				case 3:
 					getCheckTeachInspect().then(res => {
 						console.log(res)
 					})
+					break;
+				default:
 					return
 			}
-			getCheckTeachInspect().then(() => {
-				// const {pages,size,records} = data.data;
-				// console.log(data, size*(pages-1)+records.length)
-				// context.commit('changeTableData', data)
-			})
+			console.log(result)
+			context.commit('changeTableData',result)
 		},
 		/**
 		 * 填写或修改检查数据

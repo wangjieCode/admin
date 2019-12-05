@@ -20,7 +20,7 @@
       >
         <el-table-column prop="date" label="日期" width="300"></el-table-column>
         <el-table-column prop="type" label="检查类型" width="400"></el-table-column>
-        <el-table-column prop="address" label="地址" width="400"></el-table-column>
+        <el-table-column prop="address" label="检查地址" width="400"></el-table-column>
         <el-table-column
           :filters="[{ text: '已检查', value: true }, { text: '未检查', value: false }]"
           :filter-method="filterTag"
@@ -78,7 +78,7 @@ export default {
       this.$emit("next");
     },
     flagState({ row }) {
-      if (row.state == true) {
+      if (row.isWrited == true) {
         return "success-row";
       } else {
         return "warning-row";

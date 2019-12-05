@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       navList: [
-        { name: "/root", navItem: "管理员中心" },
+        { name: "/index/home", navItem: "管理员中心" },
         { name: "/index/check", navItem: "检查信息" },
         { name: "/", navItem: "档案管理" },
         { name: "/", navItem: "统计数据" },
