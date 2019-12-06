@@ -16,9 +16,9 @@
         v-loading="loading"
         :data="tableData"
         border
-        style="width:100%;"
+        style="width:100%;height: 65vh"
       >
-        <el-table-column prop="date" label="日期" width="300"></el-table-column>
+        <el-table-column prop="date" label="检查时间" width="300"></el-table-column>
         <el-table-column prop="type" label="检查类型" width="400"></el-table-column>
         <el-table-column prop="address" label="检查地址" width="400"></el-table-column>
         <el-table-column
@@ -56,8 +56,8 @@
         </el-table-column>
       </el-table>
     </el-row>
-    <el-row style="background-color: #fff" type="flex" justify="end">
-      <el-pagination @next-click="next" background layout="prev, pager, next" :total="100"></el-pagination>
+    <el-row v-if="flagTotal()" style="background-color: #fff" type="flex" justify="end">
+      <el-pagination @next-click="next" background layout="prev, pager, next" :total="total"></el-pagination>
     </el-row>
   </div>
 </template>
@@ -67,10 +67,13 @@ import jScreen from "./screen";
 import jSeven from "@/components/edit";
 export default {
   props: {
-    tableData: Array
+    tableData: Array,
+    total: Number
   },
-  mounted() {},
   methods: {
+    flagTotal() {
+      return this.total > 10 ? true : false;
+    },
     filterTag(value, row) {
       return row.state === value;
     },

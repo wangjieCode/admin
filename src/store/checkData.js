@@ -13,10 +13,13 @@ export default {
 			"address": "xxxx",
 		}],
 		loading: true,
-		test: 1000,
-		Total: 0,
+		total: 0,
+		test:''
 	},
 	getters: {
+		getTotal(state){
+			return state.total
+		},
 		tableData(state) {
 			return state.tableData
 		},
@@ -40,7 +43,8 @@ export default {
 	},
 	mutations: {
 		changeTableData(state, obj) {
-			state.table = obj
+			console.log(obj)
+			state.tableData = obj.data.records
 		}
 	},
 	actions: {
@@ -56,25 +60,18 @@ export default {
 					result = await getCheckise7sInspect()
 					break;
 				case 1:
-					getCheckdormInspect().then(res => {
-						console.log(res)
-					})
+					result = await getCheckdormInspect()
 					break;
 				case 2:
-					getCheckdormInspect().then(res => {
-						console.log(res)
-					})
+					result = await getCheckdormInspect()
 					break;
 				case 3:
-					getCheckTeachInspect().then(res => {
-						console.log(res)
-					})
+					result = await getCheckTeachInspect()
 					break;
 				default:
 					return
 			}
-			console.log(result)
-			context.commit('changeTableData',result)
+			context.commit('changeTableData',result.data)
 		},
 		/**
 		 * 填写或修改检查数据

@@ -1,9 +1,7 @@
 <template>
-  <div class="root-nav">
-    <el-menu :default-active="this.$router.path" router mode="horizontal">
-      <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">{{ item.navItem }}</el-menu-item>
-    </el-menu>
-  </div>
+  <el-menu :default-active="this.$router.path" router mode="horizontal">
+    <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">{{ item.navItem }}</el-menu-item>
+  </el-menu>
 </template>
 <script>
 export default {
@@ -13,7 +11,7 @@ export default {
         { name: "/index/home", navItem: "管理员中心" },
         { name: "/index/check", navItem: "检查信息" },
         { name: "/", navItem: "档案管理" },
-        { name: "/", navItem: "统计数据" },
+        { name: "/", navItem: "统计数据" }
       ]
     };
   },

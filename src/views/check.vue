@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <j-info-Table @choice="choice"  @submit="submit" :tableData="tableData" @next="next" />
+    <j-info-Table :total="getTotal" @choice="choice"  @submit="submit" :tableData="tableData" @next="next" />
   </div>
 </template>
 
@@ -10,7 +10,8 @@ import JInfoTable from '@/components/info/infoTable'
 export default {
   name: "home",
   computed: {
-    ...mapGetters(["test","tableData"])
+    ...mapGetters(["test","tableData",'getTotal']),
+    // ...mapState(['total'])
   },
   mounted() {
     let { checkType,count, pageNow } = this
