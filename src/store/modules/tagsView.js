@@ -6,10 +6,9 @@ const state = {
 const mutations = {
   ADD_VISITED_VIEW: (state, view) => {
     if (state.visitedViews.some(v => v.path === view.path)) return
-    // console.log(view)
     state.visitedViews.push(
       Object.assign({}, view, {
-        title: view.meta.title || 'no-name'
+        title: view.title || '未定义路由名称'
       })
     )
   },
@@ -43,13 +42,11 @@ const mutations = {
     if (index > -1) {
       state.cachedViews = state.cachedViews.slice(index, index + 1)
     } else {
-      // if index = -1, there is no cached tags
       state.cachedViews = []
     }
   },
 
   DEL_ALL_VISITED_VIEWS: state => {
-    // keep affix tags
     const affixTags = state.visitedViews.filter(tag => tag.meta.affix)
     state.visitedViews = affixTags
   },
@@ -154,7 +151,7 @@ const actions = {
 }
 
 export default {
-  // namespaced: true,
+  namespaced: true,
   state,
   mutations,
   actions

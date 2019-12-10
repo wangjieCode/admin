@@ -1,7 +1,7 @@
 import {test} from "./index";
 
 export async function login(userName,password) {
-    const {data} =  await test.post('/teacher/login',{
+    const {data} =  await test.post('/login',{
         number:userName,
         password
     })

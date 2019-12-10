@@ -1,21 +1,12 @@
 <template>
   <el-menu :default-active="this.$router.path" router mode="horizontal">
-    <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">{{ item.navItem }}</el-menu-item>
+    <el-menu-item v-for="(item,i) in router" :key="i" :index="'/index/' + item.name">{{ item.title }}</el-menu-item>
   </el-menu>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  data() {
-    return {
-      navList: [
-        { name: "/index/home", navItem: "管理员中心" },
-        { name: "/index/check", navItem: "检查信息" },
-        { name: "/", navItem: "档案管理" },
-        { name: "/", navItem: "统计数据" }
-      ]
-    };
-  },
-  mounted() {}
+  computed:mapGetters(['router']),
 };
 </script>
 <style lang="scss" scoped>

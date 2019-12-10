@@ -1,14 +1,19 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" v-model="loginForm" class="login-form" auto-complete="on" label-position="left">
+    <el-form
+      ref="loginForm"
+      v-model="loginForm"
+      class="login-form"
+      auto-complete="on"
+      label-position="left"
+    >
       <div class="title-container">
         <h3 class="title">值班管理系统</h3>
-        {{ $store.state.token }}
       </div>
 
       <el-form-item prop="username">
         <el-input
-        v-model="loginForm.username"
+          v-model="loginForm.username"
           ref="username"
           placeholder="用户名"
           name="username"
@@ -37,8 +42,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions,mapGetters } from "vuex";
 export default {
+  computed: mapGetters(['router']),
   data() {
     return {
       loginForm: {
@@ -49,17 +55,17 @@ export default {
     };
   },
   methods: {
-    ...mapActions['login'],
+    ...mapActions(["user/login"]),
     submit() {
-      const {username,password } = this.loginForm
-      this.$store.dispatch('login',{username,password}).then( () => {
-        this.$router.push('/index')
-      }).catch( () => {
-        this.$message({
-          message: '账号或密码错误，请重试',
-          type: 'success'
+      const { username, password } = this.loginForm;
+      this.$store
+        .dispatch("user/login", { username, password }).then( () => this.$router.push('/index') )
+        .catch(() => {
+          this.$message({
+            message: "账号或密码错误，请重试",
+            type: "success"
+          });
         });
-      })
     }
   }
 };

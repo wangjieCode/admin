@@ -1,5 +1,27 @@
 import Mock from 'mockjs';
 var Random = Mock.Random
+/**
+ * 登录模拟
+ */
+Mock.mock('/login', 'post', {
+  'name': '陈傻。。。',
+  "token|30": '*',
+  "router": [
+    {
+      name: 'home',
+      title: '管理员中心'
+    },
+    {
+      name: 'check',
+      title: '检查模块'
+    },
+    {
+      name: 'about',
+      title: '数据管理'
+    }
+  ]
+});
+
 Mock.mock('/test', 'post', {
   'data|10': [{
     'id': Random.integer(20, 100),
@@ -26,7 +48,7 @@ Mock.mock('/7s1', 'get', {
   'data|7': [{
     'type': 'boolean',
     'title': Random.ctitle(),
-    "value|1-2": true 
+    "value|1-2": true
   }]
 });
 

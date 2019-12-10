@@ -8,6 +8,9 @@ export default function test() {
 		}
 	})
 }
+export function Testlogin() {
+	return axios.post('/login')
+}
 /**
  * 获取当前用户当前所有检查
  */

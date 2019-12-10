@@ -1,5 +1,5 @@
 import mm from "@/server/test";
-import { getCheckTeachInspect, getCheckdormInspect,getCheckise7sInspect } from "../server/check";
+import { getCheckTeachInspect, getCheckdormInspect,getCheckise7sInspect } from "../../server/check";
 /**
  * 检查类型 0 ==> 7s 1 ==> "自习检查", 2 ==> "寝室检查", 3 ==> "教学检查"
  */

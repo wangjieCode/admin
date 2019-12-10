@@ -14,7 +14,7 @@
         </div>
         <div class="bullshit__headline">{{ message }}</div>
         <div class="bullshit__info">Please check that the URL you entered is correct, or click the button below to return to the homepage.</div>
-        <a href="" class="bullshit__return-home">Back to home</a>
+        <router-link class="bullshit__return-home" to="/index">返回首页</router-link>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@ export default {
 .wscn-http404-container{
   transform: translate(-50%,-50%);
   position: absolute;
-  top: 40%;
+  top: 60%;
   left: 50%;
 }
 .wscn-http404 {

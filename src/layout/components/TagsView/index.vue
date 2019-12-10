@@ -42,10 +42,10 @@ export default {
   },
   computed: {
     visitedViews() {
-      return this.$store.state.tagsViews.visitedViews
+      return this.$store.state.tagsView.visitedViews
     },
     routes() {
-      return this.$store.state.permission.routes
+      return this.$store.state.user.router
     }
   },
   watch: {
@@ -72,16 +72,18 @@ export default {
     isAffix(tag) {
       return tag.meta && tag.meta.affix
     },
-    filterAffixTags(routes, basePath = '/') {
+    filterAffixTags(routes, basePath = '/index') {
       let tags = []
       routes.forEach(route => {
-        const tagPath = path.resolve(basePath, route.path)
-        tags.push({
-          fullPath: tagPath,
-          path: tagPath,
-          name: route.name,
-          meta: { ...route.meta }
-        })
+        console.log(route)
+        if (route) {
+          const tagPath = path.resolve(basePath, route.path)
+          tags.push({
+            fullPath: tagPath,
+            path: tagPath,
+            name: route.name,
+          })
+        }
         if (route.children) {
           const tempTags = this.filterAffixTags(route.children, route.path)
           if (tempTags.length >= 1) {
@@ -94,16 +96,15 @@ export default {
     initTags() {
       const affixTags = this.affixTags = this.filterAffixTags(this.routes)
       for (const tag of affixTags) {
-        // Must have tag name
         if (tag.name) {
-          this.$store.dispatch('addVisitedView', tag)
+          this.$store.dispatch('tagsView/addVisitedView', tag)
         }
       }
     },
     addTags() {
       const { name } = this.$route
       if (name) {
-        this.$store.dispatch('addView', this.$route)
+        this.$store.dispatch('tagsView/addView', this.$route)
       }
       return false
     },
@@ -113,9 +114,8 @@ export default {
         for (const tag of tags) {
           if (tag.to.path === this.$route.path) {
             this.$refs.scrollPane.moveToTarget(tag)
-            // when query is different then update
             if (tag.to.fullPath !== this.$route.fullPath) {
-              this.$store.dispatch('updateVisitedView', this.$route)
+              this.$store.dispatch('tagsView/updateVisitedView', this.$route)
             }
             break
           }
@@ -123,7 +123,7 @@ export default {
       })
     },
     refreshSelectedTag(view) {
-      this.$store.dispatch('delCachedView', view).then(() => {
+      this.$store.dispatch('tagsView/delCachedView', view).then(() => {
         const { fullPath } = view
         this.$nextTick(() => {
           this.$router.replace({
@@ -133,7 +133,7 @@ export default {
       })
     },
     closeSelectedTag(view) {
-      this.$store.dispatch('delView', view).then(({ visitedViews }) => {
+      this.$store.dispatch('tagsView/delView', view).then(({ visitedViews }) => {
         if (this.isActive(view)) {
           this.toLastView(visitedViews, view)
         }
@@ -141,12 +141,12 @@ export default {
     },
     closeOthersTags() {
       this.$router.push(this.selectedTag)
-      this.$store.dispatch('delOthersViews', this.selectedTag).then(() => {
+      this.$store.dispatch('tagsView/delOthersViews', this.selectedTag).then(() => {
         this.moveToCurrentTag()
       })
     },
     closeAllTags(view) {
-      this.$store.dispatch('delAllViews').then(({ visitedViews }) => {
+      this.$store.dispatch('tagsView/delAllViews').then(({ visitedViews }) => {
         if (this.affixTags.some(tag => tag.path === view.path)) {
           return
         }
@@ -158,10 +158,7 @@ export default {
       if (latestView) {
         this.$router.push(latestView.fullPath)
       } else {
-        // now the default is to redirect to the home page if there is no tags-view,
-        // you can adjust it according to your needs.
         if (view.name === 'Dashboard') {
-          // to reload home page
           this.$router.replace({ path: '/redirect' + view.fullPath })
         } else {
           this.$router.push('/')
@@ -170,11 +167,10 @@ export default {
     },
     openMenu(tag, e) {
       const menuMinWidth = 105
-      const offsetLeft = this.$el.getBoundingClientRect().left // container margin left
-      const offsetWidth = this.$el.offsetWidth // container width
-      const maxLeft = offsetWidth - menuMinWidth // left boundary
-      const left = e.clientX - offsetLeft + 15 // 15: margin right
-
+      const offsetLeft = this.$el.getBoundingClientRect().left 
+      const offsetWidth = this.$el.offsetWidth 
+      const maxLeft = offsetWidth - menuMinWidth
+      const left = e.clientX - offsetLeft + 15
       if (left > maxLeft) {
         this.left = maxLeft
       } else {
@@ -204,7 +200,7 @@ export default {
       display: inline-block;
       position: relative;
       cursor: pointer;
-      height: 24px;
+      height: 26px;
       line-height: 26px;
       border: 1px solid #d8dce5;
       color: #495060;

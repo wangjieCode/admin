@@ -1,38 +1,44 @@
 <template>
   <div class="home">
-    <j-info-Table :total="getTotal" @choice="choice"  @submit="submit" :tableData="tableData" @next="next" />
+    <j-info-Table
+      :total="getTotal"
+      @choice="choice"
+      @submit="submit"
+      :tableData="tableData"
+      @next="next"
+    />
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import JInfoTable from '@/components/info/infoTable'
+import { mapGetters, mapActions } from "vuex";
+import JInfoTable from "@/components/info/infoTable";
 export default {
   name: "home",
   computed: {
-    ...mapGetters(["test","tableData",'getTotal']),
+    ...mapGetters(["test", "tableData", "getTotal"])
     // ...mapState(['total'])
   },
   mounted() {
-    let { checkType,count, pageNow } = this
-    this.$store.dispatch("getTableData", { checkType,count, pageNow });
+    let { checkType, count, pageNow } = this;
+    this.$store.dispatch("getTableData", { checkType, count, pageNow });
   },
   methods: {
-    ...mapActions(['getTableData','submitData']),
-    next(){
-      let { checkType,count, pageNow } = this
-      this.$store.dispatch("getTableData", { checkType,count, pageNow });
+    ...mapActions(["getTableData", "submitData"]),
+    next() {
+      let { checkType, count, pageNow } = this;
+      this.$store.dispatch("getTableData", { checkType, count, pageNow });
     },
-    choice(e){
+    choice(e) {
       this.checkType = e;
-      this.getData()
+      this.getData();
     },
-    submit(newResult){
+    submit(newResult) {
       this.$store.dispatch("submitData", { newResult });
     },
-    getData(){
-      let { checkType,count, pageNow } = this
-      this.$store.dispatch("getTableData", { checkType,count, pageNow });
+    getData() {
+      let { checkType, count, pageNow } = this;
+      this.$store.dispatch("getTableData", { checkType, count, pageNow });
     }
   },
   data() {
@@ -41,7 +47,7 @@ export default {
       pageNow: 1,
       checkType: 0,
       drawer: false,
-      disabled: true,
+      disabled: true
     };
   },
   components: {
