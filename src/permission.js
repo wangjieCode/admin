@@ -11,7 +11,7 @@ router.beforeEach(async (to, from, next) => {
   NProgress.start()
   const hasToken = getToken()
   if (hasToken) {
-    if(!flag){
+    if (!flag) {
       flag = true
       init()
     }
@@ -22,9 +22,9 @@ router.beforeEach(async (to, from, next) => {
       next()
     }
   } else {
-    if(to.path == '/index'){
+    if (to.path == '/index') {
       next('/login')
-    }else{
+    } else {
       next()
     }
   }
@@ -47,10 +47,15 @@ async function init() {
         title: "综合值班系统"
       },
       component: () => import("@/layout/layout.vue"),
-      children: routerList
+      children: routerList.concat([
+        {
+          path: '*',
+          redirect: '/404'
+        }
+      ])
     },
     {
-      path:'*',
+      path: '*',
       redirect: '/404'
     }
   ])

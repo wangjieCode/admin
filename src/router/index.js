@@ -25,10 +25,10 @@ export const routes = [
     },
     component: () => import('../views/404.vue')
   },
-  {
-    path:'*',
-    redirect: '/404'
-  }
+  // {
+  //   path:'*',
+  //   redirect: '/404'
+  // }
 ]
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -36,7 +36,4 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 })
-// router.addRoutes([
-//   
-// ])
 export default router
