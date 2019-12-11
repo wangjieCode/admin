@@ -1,14 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 export const routes = [
-  // {
-  //   path: '/index',
-  //   name: 'index',
-  //   meta: {
-  //     title: '登录'
-  //   },
-  //   component: () => import('@/layout/layout.vue')
-  // },
   {
     path: '/login',
     name: 'login',

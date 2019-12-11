@@ -17,13 +17,15 @@ export default new Vuex.Store({
     /* 导航菜单是否折叠 */
     isSidebarNavCollapse: false,
     /* 历史记录到航 */
-    historyList: []
+    historyList: [{name:'index',title:'综合值班值班系统'}]
   },
   mutations: {
     toggleNavCollapse(state) {
       state.isSidebarNavCollapse = !state.isSidebarNavCollapse
     },
-    sethistoryList: (state,list) => state.historyList.push(list),
+    sethistoryList: (state,list) => {
+      state.historyList.push(list)
+    },
     removeHis(state,index){
       console.log(      state.historyList.splice(index,1))
     }

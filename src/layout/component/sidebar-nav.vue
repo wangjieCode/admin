@@ -6,23 +6,22 @@
         active-text-color="#4dbcff"
         :default-active="currentMenu"
     >
-    {{router}}
         <DynamicMenu :menuList="router"></DynamicMenu>
     </el-menu>
 </template>
 
 <script>
 import DynamicMenu from '@/components/dynamic-menu'
-import { mapState,mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
     data() {
         return {
             isCollapse: true,
+            router: JSON.parse(localStorage.getItem('router'))
         }
     },
     computed: {
-        ...mapGetters(['router']),
         ...mapState(['isSidebarNavCollapse']),
         ...mapState('permission', ['sidebarMenu', 'currentMenu'])
     },

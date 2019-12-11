@@ -50,7 +50,15 @@ export default {
     methods: {
         ...mapMutations(['sethistoryList']),
         gotoRoute(name,title) {
-          this.$store.commit('sethistoryList',{name,title})
+          let flag = true;
+          this.$store.state.historyList.forEach(element => {
+            if(element.name == name){
+              flag = false
+            }
+          });
+          if(flag){
+            this.$store.commit('sethistoryList',{name,title})
+          }
           this.$router.push({ name })
         }
     }

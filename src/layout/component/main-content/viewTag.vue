@@ -1,12 +1,12 @@
 <template>
-  <el-row class="view-tag">
+  <div class="view-tag">
       <el-button-group class="history-tag" :key="index" v-for="(item,index) in history">
-        <el-button autofocus size="medium" @click="tohistory(item.name)">{{item.title}}</el-button>
-        <el-button @click="remove(index)" size="small">
+        <el-button autofocus class="active" size="mini" @click="tohistory(item.name)">{{item.title}}</el-button>
+        <el-button @click="remove(index)" size="mini">
           <i class="el-icon-close"></i>
         </el-button>
       </el-button-group>
-  </el-row>
+  </div>
 </template>
 
 <script>
@@ -15,7 +15,6 @@ export default {
   methods:{
     ...mapMutations(['removeHis']),
     tohistory(name){
-        console.log(name)
         this.$router.replace({name})
     },
     remove(index){
@@ -36,11 +35,11 @@ export default {
   align-content: center;
   background-color: #fff;
   width: 100%;
-  margin: 10 0px;
+  padding: 10px 0px 15px 0px;
+  border-bottom: 1px solid #ccc;
   .history-tag {
     display: flex;
     margin-right: 10px;
-    border: 1px solid  greenyellow;
   }
   .el-button {
     font-size: 18px;

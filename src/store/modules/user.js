@@ -23,6 +23,7 @@ const actions = {
                 context.commit('name', name);
                 setToken(token)
                 context.commit('router',router)
+                localStorage.setItem('router', JSON.stringify(router))
                 await context.dispatch('initRouter',router)
                 resolve()
             } catch (e) {
