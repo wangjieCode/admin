@@ -1,10 +1,10 @@
 <template>
   <aside class="aside__top">
     <span
-      class="iconfont icon-nav toggleNavCollapse"
+      class="iconfont  toggleNavCollapse"
       :class="{active:isSidebarNavCollapse}"
       @click="toggleNavCollapse"
-    ></span>
+    ><i class="el-icon-s-fold"></i> </span>
     <el-breadcrumb separator="/">
       <transition-group name="breadcrumb">
         <template v-for="(route) in $store.state.user.router">
@@ -22,7 +22,7 @@
         <span class="user-name">{{account}}</span>
         <el-dropdown trigger="click" placement="top">
           <span class="el-dropdown-link">
-            <i class="el-icon-arrow-down el-icon--right"></i>
+            <i class="el-icon-arrow-down"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>个人中心</el-dropdown-item>
@@ -31,7 +31,7 @@
         </el-dropdown>
       </div>
       <div class="quit-system" @click="loginOut">
-        <span class="iconfont icon-quit"></span>
+        <span class="el-icon-close"></span>
       </div>
     </div>
   </aside>
