@@ -27,7 +27,10 @@ export default new Vuex.Store({
       state.historyList.push(list)
     },
     removeHis(state,index){
-      console.log(      state.historyList.splice(index,1))
+      state.historyList.splice(index,1)
+      return new Promise( res => {
+        res(state.historyList[index-1])
+      })
     }
   },
   namespace: true,

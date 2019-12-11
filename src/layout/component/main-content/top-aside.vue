@@ -5,17 +5,7 @@
       :class="{active:isSidebarNavCollapse}"
       @click="toggleNavCollapse"
     ><i class="el-icon-s-fold"></i> </span>
-    <el-breadcrumb separator="/">
-      <transition-group name="breadcrumb">
-        <template v-for="(route) in $store.state.user.router">
-          <el-breadcrumb-item
-            :key="route.name"
-            :to="{name:route.name}"
-            :class="{'is-last-link':true}"
-          >{{route.meta.title}}</el-breadcrumb-item>
-        </template>
-      </transition-group>
-    </el-breadcrumb>
+    综合值班管理系统
     <div class="aside__top--right">
       <div class="user-msg">
         <img class="user-img" :src="avatar" alt />

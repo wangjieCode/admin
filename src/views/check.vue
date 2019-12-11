@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="check">
     <j-info-Table
       :total="getTotal"
       @choice="choice"
@@ -56,11 +56,4 @@ export default {
 };
 </script>
 <style lang="scss">
-.home {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  //   align-content: flex-start;
-  //   align-items: flex-start;
-}
 </style>

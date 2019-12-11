@@ -22,13 +22,13 @@ Mock.mock('/login', 'post', {
         title: '检查模块',
       }
     },
-    // {
-    //   name: 'about',
-    //   path:'index/about',
-    //   meta:{
-    //     title: '数据管理',
-    //   }
-    // }
+    {
+      name: 'about',
+      path:'index/about',
+      meta:{
+        title: '数据管理',
+      }
+    }
   ],
 });
 

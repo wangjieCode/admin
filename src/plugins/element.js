@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import elementUI from 'element-ui';
+// import VCommon from 'v-charts/lib/line.common'
+// Vue.use(VCommon)
 Vue.use(elementUI)
 // import {
 // 	Menu,

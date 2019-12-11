@@ -1,6 +1,6 @@
 <template>
   <div class="box-card">
-    <el-row style="background-color: #fff" type="flex" justify="start">
+    <el-row style="background-color: #fff;width: 100%" type="flex" justify="space-between">
       <el-col style="display: flex;
     align-items: center;" :span="19">
         <span style="padding:0 30px;font-weight: bold">选择检查类型</span>
@@ -224,8 +224,10 @@ $header: 150 * 3 /10 + "px";
 .box-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #fff;
+  align-items: center;
+  padding-top: 20px;
 }
 .el-table .success-row {
   background: #f0f9eb !important;

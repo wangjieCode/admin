@@ -17,6 +17,10 @@ export const routes = [
     },
     component: () => import('../views/404.vue')
   },
+  {
+    path:'*',
+    redirect:'/login'
+  }
 ]
 Vue.use(VueRouter)
 const router = new VueRouter({

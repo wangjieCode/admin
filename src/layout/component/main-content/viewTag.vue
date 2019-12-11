@@ -2,7 +2,7 @@
   <div class="view-tag">
       <el-button-group class="history-tag" :key="index" v-for="(item,index) in history">
         <el-button autofocus class="active" size="mini" @click="tohistory(item.name)">{{item.title}}</el-button>
-        <el-button @click="remove(index)" size="mini">
+        <el-button @click="remove(index,item.name)" size="mini">
           <i class="el-icon-close"></i>
         </el-button>
       </el-button-group>
@@ -18,7 +18,9 @@ export default {
         this.$router.replace({name})
     },
     remove(index){
-        this.$store.commit('removeHis',index)
+      this.$store.commit('removeHis',index)
+      const {name} = this.history[index-1]
+      this.$router.replace({name})
     }
   },
   computed: {
