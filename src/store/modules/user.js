@@ -5,19 +5,26 @@ const state = {
     token: getToken(),
     router: [
         {
-          name: 'home',
-          title: '管理员中心',
-          path:'/home'
+            name: 'home',
+            path: '/index/home',
+            meta:{
+                title: '首页',
+                icon:''
+            }
         },
         {
           name: 'check',
-          title: '检查模块',
-          path:'/check'
+          path:'/index/check',
+          meta:{
+            title: '检查模块',
+          }
         },
         {
           name: 'about',
-          title: '数据管理',
-          path:'/about'
+          path:'index/about',
+          meta:{
+            title: '数据管理',
+          }
         }
       ],
     name: ''

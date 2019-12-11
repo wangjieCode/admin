@@ -17,7 +17,7 @@ if (process.env.NODE_ENV == 'development') {
 } else {
   Vue.config.devtools = false;
 }
-
+import './styles/index.scss'
 Vue.config.productionTip = false
 
 // 示例初始化

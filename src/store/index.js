@@ -13,6 +13,21 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  state: {
+    /* 导航菜单是否折叠 */
+    isSidebarNavCollapse: false,
+    /* 历史记录到航 */
+    historyList: []
+  },
+  mutations: {
+    toggleNavCollapse(state) {
+      state.isSidebarNavCollapse = !state.isSidebarNavCollapse
+    },
+    sethistoryList: (state,list) => state.historyList.push(list),
+    removeHis(state,index){
+      console.log(      state.historyList.splice(index,1))
+    }
+  },
   namespace: true,
   getters,
   strict: process.env.NODE_ENV === "development",  //判断在开发模式使用严格模式， 会有深度的警告（不能直接改变state的值等）

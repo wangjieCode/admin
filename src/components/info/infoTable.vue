@@ -225,7 +225,6 @@ $header: 150 * 3 /10 + "px";
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 30px;
   background-color: #fff;
 }
 .el-table .success-row {

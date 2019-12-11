@@ -8,18 +8,28 @@ Mock.mock('/login', 'post', {
   "token|30": '*',
   "router": [
     {
-      name: 'home',
-      title: '管理员中心'
+        name: 'home',
+        path: '/index/home',
+        meta:{
+            title: '首页',
+            icon:''
+        }
     },
     {
       name: 'check',
-      title: '检查模块'
+      path:'/index/check',
+      meta:{
+        title: '检查模块',
+      }
     },
     {
       name: 'about',
-      title: '数据管理'
+      path:'index/about',
+      meta:{
+        title: '数据管理',
+      }
     }
-  ]
+  ],
 });
 
 Mock.mock('/test', 'post', {
