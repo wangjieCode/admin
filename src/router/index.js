@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 export const routes = [
-  {
-    path: '/index',
-    name: 'index',
-    meta: {
-      title: '登录'
-    },
-    component: () => import('@/layout/layout.vue')
-  },
+  // {
+  //   path: '/index',
+  //   name: 'index',
+  //   meta: {
+  //     title: '登录'
+  //   },
+  //   component: () => import('@/layout/layout.vue')
+  // },
   {
     path: '/login',
     name: 'login',
@@ -25,10 +25,6 @@ export const routes = [
     },
     component: () => import('../views/404.vue')
   },
-  // {
-  //   path:'*',
-  //   redirect: '/404'
-  // }
 ]
 Vue.use(VueRouter)
 const router = new VueRouter({

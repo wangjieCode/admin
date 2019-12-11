@@ -1,32 +1,11 @@
 import { getToken,setToken,removeToken } from "../../util/token"
 import {transFromRouter} from '@/util/transfrom'
 import { Testlogin } from '@/server/test'
+import { init } from '@/permission'
+
 const state = {
     token: getToken(),
-    router: [
-        {
-            name: 'home',
-            path: '/index/home',
-            meta:{
-                title: '首页',
-                icon:''
-            }
-        },
-        {
-          name: 'check',
-          path:'/index/check',
-          meta:{
-            title: '检查模块',
-          }
-        },
-        {
-          name: 'about',
-          path:'index/about',
-          meta:{
-            title: '数据管理',
-          }
-        }
-      ],
+    router: [],
     name: ''
 }
 const mutations = {
@@ -36,25 +15,25 @@ const mutations = {
 
 const actions = {
     // eslint-disable-next-line no-unused-vars
-    login({ commit }, { username, password }) {
+    login(context, { username, password }) {
         return new Promise(async (resolve, reject) => {
             try {
                 const { data } = await Testlogin()
                 const { name, router,token } = data;
-                commit('name', name);
+                context.commit('name', name);
                 setToken(token)
-                commit('router',router)
+                context.commit('router',router)
+                await context.dispatch('initRouter',router)
                 resolve()
             } catch (e) {
                 reject(e)
             }
         })
-
     },
     // eslint-disable-next-line no-unused-vars
-    async initRouter(context) {
-        const routers = await transFromRouter(context.state.router)
-        return routers
+    async initRouter(context,router) {
+        const routers = await transFromRouter(router)
+        await init(routers)
     },
     logout(){
         removeToken()

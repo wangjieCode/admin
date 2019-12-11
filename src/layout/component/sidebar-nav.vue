@@ -6,6 +6,7 @@
         active-text-color="#4dbcff"
         :default-active="currentMenu"
     >
+    {{router}}
         <DynamicMenu :menuList="router"></DynamicMenu>
     </el-menu>
 </template>

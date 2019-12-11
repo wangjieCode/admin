@@ -59,8 +59,11 @@ export default {
     submit() {
       const { username, password } = this.loginForm;
       this.$store
-        .dispatch("user/login", { username, password }).then( () => this.$router.push('/index') )
-        .catch(() => {
+        .dispatch("user/login", { username, password }).then( () => {
+            this.$router.push('/index')
+        })
+        .catch(e => {
+          console.log(e)
           this.$message({
             message: "账号或密码错误，请重试",
             type: "success"

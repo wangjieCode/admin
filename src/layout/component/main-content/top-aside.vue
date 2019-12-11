@@ -43,16 +43,7 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      crumbList: [
-        {
-          name: "home",
-          path: "/index/home",
-          meta: {
-            title: "首页",
-            icon: ""
-          }
-        }
-      ]
+
     };
   },
   computed: {
