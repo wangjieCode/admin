@@ -1,18 +1,45 @@
 <template>
   <div class="home">
-    <edit />
+    <ve-ring :data="{
+          columns: ['日期', '访问用户'],
+          rows: [
+            { '日期': '1/1', '访问用户': 1393 },
+            { '日期': '1/2', '访问用户': 3530 },
+            { '日期': '1/3', '访问用户': 2923 },
+            { '日期': '1/4', '访问用户': 1723 },
+            { '日期': '1/5', '访问用户': 3792 },
+            { '日期': '1/6', '访问用户': 4593 }
+          ]
+        }"></ve-ring>
+    <ve-histogram :data="chartData" :settings="chartSettings"></ve-histogram>
   </div>
 </template>
 
 <script>
-import edit from '@/components/edit/from@'
 export default {
-  components:{
-    edit
+  data() {
+    this.chartSettings = {
+      labelMap: {
+        PV: "访问用户",
+        Order: "下单用户"
+      },
+      legendName: {
+        访问用户: "访问用户 total: 10000"
+      }
+    };
+    return {
+      chartData: {
+        columns: ["date", "PV", "Order", "OrderRate"],
+        rows: [
+          { date: "1/1", PV: 1393, Order: 1093, OrderRate: 0.32 },
+          { date: "1/2", PV: 3530, Order: 3230, OrderRate: 0.26 },
+          { date: "1/3", PV: 2923, Order: 2623, OrderRate: 0.76 },
+          { date: "1/4", PV: 1723, Order: 1423, OrderRate: 0.49 },
+          { date: "1/5", PV: 3792, Order: 3492, OrderRate: 0.323 },
+          { date: "1/6", PV: 4593, Order: 4293, OrderRate: 0.78 }
+        ]
+      }
+    };
   }
-}
+};
 </script>
-
-<style>
-
-</style>
